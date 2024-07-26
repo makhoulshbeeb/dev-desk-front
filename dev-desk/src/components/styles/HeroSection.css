@@ -1,0 +1,47 @@
+.hero-bg{
+    background-image: url('../assets/hero_bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100dvw;
+    height: 720px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.hero-bg > div {
+    min-width: 30%;
+}
+
+.half{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.screen{
+    display: flex;
+    border-radius: 2rem;
+    border: 0.2rem solid var(--primary-color);
+    background-color: var(--background-color);
+    align-items: center;
+    justify-content: space-around;
+    padding: 1rem;
+    height: 400px;
+    width: 640px;
+}
+.stand{
+    border-radius: 2rem;
+    border: 0.2rem solid var(--primary-color);
+    background-color: var(--background-color);
+    height: 48px;
+    width: 480px;
+}
+.screen > img{
+    scale: 1.05;
+}
+
+h1{
+    color: var(--text-color);
+    font-size: 3.2rem;
+}
