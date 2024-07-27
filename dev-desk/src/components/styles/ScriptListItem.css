@@ -1,0 +1,35 @@
+.item-container{
+    width:100%;
+    background-color: var(--background-light);
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.item-container > .flex{
+    gap:1rem;
+}
+.item-container > .flex > .column{
+    gap: 0.5rem;
+}
+.script-username, .time-ago {
+    font-size: 1.1rem;
+    color: var(--text-light);
+}
+.item-container > .flex > .img{
+    cursor: pointer;
+    border-radius: 0.2rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 72px;
+    width: 72px;
+}
+.script-name{
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+.script-name, .script-username{
+    cursor: pointer;
+}

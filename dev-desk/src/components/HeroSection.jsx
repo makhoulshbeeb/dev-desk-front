@@ -11,9 +11,9 @@ export default function HeroSection() {
             <div>
                 <div className="half">
                     <div className="screen">
-                        <img src={require("./assets/html.png")}/>
-                        <img src={require("./assets/cmd.png")} style={{scale:'1.2'}}/>
-                        <img src={require("./assets/js.png")}/>
+                        <img src={require("./assets/html.png")} alt=''/>
+                        <img src={require("./assets/cmd.png")} alt='' style={{scale:'1.2'}}/>
+                        <img src={require("./assets/js.png")} alt=''/>
                     </div>
                     <div className="stand"></div>
                 </div>
