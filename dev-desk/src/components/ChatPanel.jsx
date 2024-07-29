@@ -1,18 +1,20 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './styles/ChatPanel.css'
-import { faChevronUp, faMessage, faPaperPlane, faPenToSquare, faUpDown } from '@fortawesome/free-solid-svg-icons'
+import { faChevronUp, faPaperPlane, faPenToSquare} from '@fortawesome/free-solid-svg-icons'
 import ListItem from './ListItem'
 import Input from './Input';
+import { useDeleteChatMutation , useGetAllChatsQuery } from '../api/ChatsApi';
 
-export default function ChatPanel({chat_id}) {
-    chat_id=1;
+export default function ChatPanel({username='2R0GPVEef32h7b7MCaKS'}) {
+    const {data, isLoading, isSucces, isError, error} = useGetAllChatsQuery();
+    console.log(data);
     return (
         <>
         <div className='chat-container'>
             <ChatToggleBar></ChatToggleBar>
-            <ChatList></ChatList>
+            <ChatList list={data}></ChatList>
         </div>
-        {chat_id!=0 && <Chat></Chat>}
+        {data && <Chat></Chat>}
         </>
     )
 }
@@ -34,15 +36,16 @@ function ChatToggleBar() {
 }
 
 function ChatList({ list = [{ username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry?', time_ago: '5min' }, { username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry?', time_ago: '5min' }, { username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry? Wanna a sprite cranberry?Wanna a sprite cranberry?', time_ago: '5min' }, { username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry?', time_ago: '5min' }, { username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry?', time_ago: '5min' }, { username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry?', time_ago: '5min' }, { username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry?', time_ago: '5min' }, { username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry?', time_ago: '5min' }] }) {
+    const [deleteChat] = useDeleteChatMutation();
     return (
         <div className="chat-list">
             {
                 list.map(element => {
                     return (
-                        <>
-                            <ListItem title={element.username} subText={element.lastMessage} time_ago={element.time_ago} image={require('./assets/icons/profile.png')} imageBorderRadius={'36px'} bgColor='var(--background-color)'></ListItem>
+                        <div onClick={()=>console.log(element.id)}>
+                            <ListItem key={element.id} title={element.username_2} subText={'element.lastMessage'} time_ago={"element.time_ago"} image={require('./assets/icons/profile.png')} imageBorderRadius={'36px'} bgColor='var(--background-color)'></ListItem>
                             <hr></hr>
-                        </>
+                        </div>
                     )
                 })
             }
