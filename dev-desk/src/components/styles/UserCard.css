@@ -1,0 +1,31 @@
+.user-card{
+    position: sticky;
+    top:2rem;
+    width:25dvw;
+    margin: 2rem 0 0 5dvw;
+    height: 24rem;
+    border-radius: 2rem;
+    background-color: var(--background-light);
+    box-shadow: -0.25rem 0.25rem 0.75rem var(--shadow-color);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.user-banner{
+    background-image: linear-gradient(to right, var(--primary-color), var(--shadow-color));
+    height: 45%;
+    padding: 1rem;
+}
+.user-info{
+    height: 55%;
+    padding: 1rem;
+}
+.user-pfp{
+    position: absolute;
+    height: 10rem;
+    width: 10rem;
+    border-radius: 5rem;
+    background-color: var(--background-color);
+    margin: 0 0 2rem 2rem;
+}

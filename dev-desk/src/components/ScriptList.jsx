@@ -1,20 +1,23 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from './Button';
 import DropDown from './DropDown';
-import ScriptListItem from './ScriptListItem';
+import ListItem from './ListItem';
 import './styles/ScriptList.css';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-export default function ScriptList({ list = [{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' }] }) {
+export default function ScriptList({header, height, list = [{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' }] }) {
+    var text = <><FontAwesomeIcon icon={faPlus} size='lg'></FontAwesomeIcon>&nbsp; Creat Project</>
     return (
-        <div className="script-list-container">
+        <div className="script-list-container" style={{height:height}}>
             <div className="head-tab">
-                <Button bgColor={'--background-color'} text={'+ Create Project'} borderRadius='0.6rem'></Button>
+                {header?<h2>{header}</h2>:<Button bgColor={'--background-color'} text={text} borderRadius='0.6rem'></Button>}
                 <DropDown></DropDown>
             </div>
-            <div className='list-items'>
+            <div className='script-list'>
             {
                 list.map(script => {
                     return (
-                        <ScriptListItem script_name={script.scriptName} username={script.username} language={script.language} time_ago={'10 hours'}></ScriptListItem>
+                        <ListItem title={script.scriptName} subText={`@${script.username}`} language={script.language} time_ago={'10 hours'}></ListItem>
                     )
                 })
             }

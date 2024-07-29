@@ -1,6 +1,6 @@
 .header-container{
     width:100%;
-    height: 90px;
+    height: 10dvh;
     padding: 0 5dvw;
     justify-content: space-between;
     align-items: center;
@@ -25,10 +25,14 @@ nav a{
     font-weight:600;
     text-decoration: none;
     color: var(--text-color);
-    font-size: 1.25rem;
+    font-size: 1.3rem;
 }
 .auth{
+    width:50%;
     gap:0.8rem;
     justify-content: flex-end;  
     align-items: center;
+}
+.auth > div{
+    width:48%;
 }

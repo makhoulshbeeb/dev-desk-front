@@ -20,7 +20,9 @@ export default function Header() {
             </nav>
             <div className="flex auth">
                 <FontAwesomeIcon icon={faSearch} size='xl'></FontAwesomeIcon>
+                <div>
                 <Input name='search' id='search' placeholder='Search . . .'></Input>
+                </div>
                 <Button bgColor='--primary-color' text='Log In' borderRadius='2rem'></Button>
                 <Button bgColor='--background-light' text='Sign Up' borderRadius='2rem'></Button>
             </div>

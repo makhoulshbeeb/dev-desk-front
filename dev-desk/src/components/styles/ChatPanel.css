@@ -1,0 +1,124 @@
+.chat-container{
+    width: 25dvw;
+    position: fixed;
+    bottom: 0;
+    right: 5dvw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    border:0.1rem solid var(--text-light);
+    border-radius: 1rem;
+    border-bottom: 0;
+    font-size: 8px;
+}
+
+.chat-toggle{
+    width: 100%;
+    height: 4.5rem;
+    background-color: var(--background-light);
+    border-radius: 1rem 1rem 0 0;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.chat-toggle > div{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.my-pfp{
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 1.5rem;
+    background-color: var(--background-color);
+}
+
+.chat-list{
+    display: flex;
+    flex-direction: column;
+    height: 60dvh;
+    overflow-y: scroll;
+    background-color: var(--background-color);
+    width: 100%;
+    align-items: center;
+    overflow-y: scroll;
+}
+hr{
+    width: 75%;
+    border-color: var(--text-light);
+}
+.chat{
+    position: fixed;
+    right: 30dvw;
+    margin-right: 1rem;
+    bottom: 0;
+    border-radius: 1rem;
+    width: 25dvw;
+    height:calc(60dvh + 4.5rem);
+    background-color: var(--background-color);
+    border: 0.1rem solid var(--text-light);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.chat-log{
+    display: flex;
+    flex-direction: column-reverse;
+    gap:0.5rem;
+    overflow-y: scroll;
+    width:100%;
+    padding: 1rem;
+}
+.message{
+    max-height: fit-content;
+    max-width:75%;
+    display: flex;
+    flex-direction: column;
+}
+.message > p{
+    color: var(--text-light);
+    font-size: 1rem;
+}
+.message > div {
+    color: var(--text-color);
+    padding: 1rem;
+    max-width: fit-content;
+    border-radius: 1rem;
+}
+.sent{
+    align-items:flex-end;
+    align-self:flex-end;
+}
+.sent > div{
+    background-color: var(--primary-color);
+}
+.recieved{
+    align-items:flex-start;
+    align-self:flex-start;
+}
+.recieved > div {
+    background-color: var(--background-light);
+}
+.chat-input{
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap:1rem;
+}
+
+.send-btn{
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 1.75rem;
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

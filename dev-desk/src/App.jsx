@@ -1,15 +1,20 @@
 import './App.css';
+import ChatPanel from './components/ChatPanel';
 import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import ScriptList from './components/ScriptList';
+import Home from './pages/Home';
+import Search from './pages/Search';
+import User from './pages/User';
+
 
 function App() {
   return (
     <div className="App">
       <Header></Header>
-      <HeroSection></HeroSection>
-      <ScriptList></ScriptList>
-      
+      <Home></Home>
+      {/* <User></User>
+      <Search></Search> */}
+      <ChatPanel></ChatPanel> 
+
     </div>
   );
 }
