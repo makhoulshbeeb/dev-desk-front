@@ -4,8 +4,10 @@ import DropDown from './DropDown';
 import ListItem from './ListItem';
 import './styles/ScriptList.css';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useGetAllScriptsQuery } from '../api/ScriptsApi';
 
 export default function ScriptList({header, height, list = [{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' },{ scriptName: 'Test.js', language: 'javascript', username: 'moxifloxi' }] }) {
+    
     var text = <><FontAwesomeIcon icon={faPlus} size='lg'></FontAwesomeIcon>&nbsp; Creat Project</>
     return (
         <div className="script-list-container" style={{height:height}}>
