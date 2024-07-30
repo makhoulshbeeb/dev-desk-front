@@ -3,21 +3,25 @@ import './styles/ChatPanel.css'
 import { faChevronUp, faPaperPlane, faPenToSquare} from '@fortawesome/free-solid-svg-icons'
 import ListItem from './ListItem'
 import Input from './Input';
-import { useDeleteChatMutation , useGetAllChatsQuery } from '../api/ChatsApi';
-import { useEffect } from 'react';
+import { useDeleteChatMutation , useGetAllChatsQuery, useGetChatsByUsernameQuery } from '../api/ChatsApi';
+import { useEffect, useState } from 'react';
+import { useGetMessagesQuery } from '../api/MessagesApi';
 
 export default function ChatPanel({username='2R0GPVEef32h7b7MCaKS'}) {
-   
-    var {data, isLoading, isSucces, isError, error} = useGetAllChatsQuery();
+    const [chatId, setChatId] = useState(null);
+    useEffect(()=>{
+        console.log(chatId);
+    },[chatId]);
+    var {data, isLoading, isSucces, isError, error} = useGetChatsByUsernameQuery({username});
     console.log(data);
     useEffect(()=>{console.log(data)},[data])
     return (
         <>
         <div className='chat-container'>
             <ChatToggleBar></ChatToggleBar>
-            <ChatList list={data}></ChatList>
+            <ChatList list={data}  setChatId={setChatId}></ChatList>
         </div>
-        {data && <Chat></Chat>}
+        {chatId && <Chat chat_id={chatId}></Chat>}
         </>
     )
 }
@@ -38,15 +42,16 @@ function ChatToggleBar() {
     )
 }
 
-function ChatList({ list = [{id:2, username_2: 'test'}] }) {
+function ChatList({ list = [{id:2, username_2: 'test'}], setChatId, chatId}) {
     const [deleteChat] = useDeleteChatMutation();
     return (
         <div className="chat-list">
             {
                 list.map(element => {
+                    if (chatId==element.id) console.log(chatId)
                     return (
-                        <div key={element.id} keyProp={element.id} onClick={()=>{console.log(element.id);deleteChat({id : element.id}); console.log(list)}}>
-                            <ListItem title={element.username_2} subText={'element.lastMessage'} time_ago={''} image={require('./assets/icons/profile.png')} imageBorderRadius={'36px'} bgColor='var(--background-color)'></ListItem>
+                        <div key={element.id} onClick={()=>{setChatId(element.id)}} onDoubleClick={()=>{deleteChat(element.id)}}>
+                            <ListItem title={element.username_2} subText={'element.lastMessage'} time_ago={''} image={require('./assets/icons/profile.png')} imageBorderRadius={'36px'} bgColor={`${element.id!=chatId?'var(--background-color)':'var(--background-color)'}`}></ListItem>
                             <hr></hr>
                         </div>
                     )
@@ -56,24 +61,26 @@ function ChatList({ list = [{id:2, username_2: 'test'}] }) {
     )
 }
 
-function Chat(){
+function Chat(chat_id){
+    var {data, isLoading, isSucces, isError, error} = useGetMessagesQuery({id : chat_id});
+    console.log(data)
     return(
         <div className='chat'>
-            <ChatLog></ChatLog>
+            <ChatLog messages={data}></ChatLog>
             <ChatInput></ChatInput>
         </div>
     )
 }
 
-function ChatLog({ messages=[{username:'moxifloxi',message:'OK! stfu', time:'28-7-2024 2:02 am'},{username:'LebronJames',message:'Wanna sprite cranberry?', time:'28-7-2024 2:01 am'},{username:'moxifloxi',message:'no', time:'28-7-2024 2:02 am'},{username:'LebronJames',message:'Wanna sprite cranberry?', time:'28-7-2024 2:01 am'},{username:'moxifloxi',message:'no', time:'28-7-2024 2:02 am'},{username:'LebronJames',message:'Wanna a sprite cranberry? Wanna a sprite cranberry?Wanna a sprite cranberry?', time:'28-7-2024 2:01 am'},{username:'moxifloxi',message:'no', time:'28-7-2024 2:02 am'},{username:'LebronJames',message:'Wanna a sprite cranberry? Wanna a sprite cranberry?Wanna a sprite cranberry?', time:'28-7-2024 2:01 am'},{username:'moxifloxi',message:'no', time:'28-7-2024 2:02 am'},{username:'LebronJames',message:'Wanna sprite cranberry?', time:'28-7-2024 2:01 am'},{username:'moxifloxi',message:'no', time:'28-7-2024 2:02 am'},{username:'LebronJames',message:'Wanna a sprite cranberry? Wanna a sprite cranberry?Wanna a sprite cranberry?', time:'28-7-2024 2:01 am'}]}){
+function ChatLog({ messages = [{username: 'moxifloxi', message:'long string jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', created_at:'now'}] }){
     return(
         <div className='chat-log'>
             {messages.map(element=>{
                 return(
                     <ChatMessage
-                        type= {element.username=='moxifloxi'?'sent':'recieved'}
+                        type= {element.username==localStorage.getItem('username')?'sent':'recieved'}
                         message={element.message}
-                        time={element.time}
+                        time={element.created_at}
                     ></ChatMessage>
                 )
             }
@@ -84,7 +91,7 @@ function ChatLog({ messages=[{username:'moxifloxi',message:'OK! stfu', time:'28-
 function ChatMessage({type , message, time}){
     return(
         <div className={`message ${type}`}>
-            <div>{message}</div>
+            <div className='flex'><div>{message}</div></div>
             <p>{time}</p>
         </div>
     )
