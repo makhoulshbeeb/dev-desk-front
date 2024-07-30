@@ -6,7 +6,7 @@ export const messagesApi = createApi({
     tagTypes: ['Messages'],
     endpoints: (builder) => ({
       getMessages: builder.query({
-        query:({chat_id})=>`messages/getby/chat_id/${chat_id}`,
+        query:({chat_id})=>`messages/${chat_id}`,
         providesTags: (result, error, arg) =>
           result
             ? [...result.map(({ id }) => ({ type: 'Messages', id })), 'Messages']
