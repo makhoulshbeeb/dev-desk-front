@@ -4,10 +4,13 @@ import { faChevronUp, faPaperPlane, faPenToSquare} from '@fortawesome/free-solid
 import ListItem from './ListItem'
 import Input from './Input';
 import { useDeleteChatMutation , useGetAllChatsQuery } from '../api/ChatsApi';
+import { useEffect } from 'react';
 
 export default function ChatPanel({username='2R0GPVEef32h7b7MCaKS'}) {
-    const {data, isLoading, isSucces, isError, error} = useGetAllChatsQuery();
+   
+    var {data, isLoading, isSucces, isError, error} = useGetAllChatsQuery();
     console.log(data);
+    useEffect(()=>{console.log(data)},[data])
     return (
         <>
         <div className='chat-container'>
@@ -35,15 +38,15 @@ function ChatToggleBar() {
     )
 }
 
-function ChatList({ list = [{ username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry?', time_ago: '5min' }, { username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry?', time_ago: '5min' }, { username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry? Wanna a sprite cranberry?Wanna a sprite cranberry?', time_ago: '5min' }, { username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry?', time_ago: '5min' }, { username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry?', time_ago: '5min' }, { username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry?', time_ago: '5min' }, { username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry?', time_ago: '5min' }, { username: 'LebronJames', lastMessage: 'Wanna a sprite cranberry?', time_ago: '5min' }] }) {
+function ChatList({ list = [{id:2, username_2: 'test'}] }) {
     const [deleteChat] = useDeleteChatMutation();
     return (
         <div className="chat-list">
             {
                 list.map(element => {
                     return (
-                        <div onClick={()=>console.log(element.id)}>
-                            <ListItem key={element.id} title={element.username_2} subText={'element.lastMessage'} time_ago={"element.time_ago"} image={require('./assets/icons/profile.png')} imageBorderRadius={'36px'} bgColor='var(--background-color)'></ListItem>
+                        <div key={element.id} keyProp={element.id} onClick={()=>{console.log(element.id);deleteChat({id : element.id}); console.log(list)}}>
+                            <ListItem title={element.username_2} subText={'element.lastMessage'} time_ago={''} image={require('./assets/icons/profile.png')} imageBorderRadius={'36px'} bgColor='var(--background-color)'></ListItem>
                             <hr></hr>
                         </div>
                     )
