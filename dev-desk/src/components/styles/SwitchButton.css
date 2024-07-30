@@ -1,0 +1,47 @@
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 14rem;
+  height: 3rem;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.3s;
+  border-radius: 0.25rem;
+  background-color: var(--background-light);
+}
+
+.slider::after {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  width: 7rem;
+  background-color: var(--primary-color);
+  transition: 0.3s;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.slider::after {
+  content: "Login";
+  transform: translateX(7rem);
+}
+
+input:checked + .slider::after {
+  transform: translateX(0);
+  content: "Signup";
+}
