@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login,  isLoading, error ] = useLoginMutation();
+  const [login, isLoading, error] = useLoginMutation();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const navigate = useNavigate();
   const handleLogIn = async () => {
@@ -23,8 +23,8 @@ const Login = () => {
     }
 
     try {
-      const result = await login({ email, password });
-      console.log("Login successful:", result.error);
+      const result = await login({ email, password }).unwrap();
+      console.log("Login successful:", result);
       localStorage.setItem("token", result.authorisation.token);
       localStorage.setItem("username", result.user.username);
       navigate("/");
