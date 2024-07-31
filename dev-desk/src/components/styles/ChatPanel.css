@@ -42,9 +42,9 @@
     height: 60dvh;
     overflow-y: scroll;
     background-color: var(--background-color);
-    width: 100%;
     align-items: center;
     overflow-y: scroll;
+    width: 100%;
 }
 .chat-list > div {
     display: flex;

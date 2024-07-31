@@ -1,8 +1,8 @@
 import './styles/Button.css';
 
-export default function Button({bgColor, text, borderRadius='0rem', textColor='--text-color'}){
+export default function Button({bgColor, text, borderRadius='0rem', textColor='--text-color', onClick}){
     return(
-        <button style={{backgroundColor : `var(${bgColor})`, borderRadius:borderRadius, color: `var(${textColor})`}}>
+        <button  onClick={onClick} style={{backgroundColor : `var(${bgColor})`, borderRadius:borderRadius, color: `var(${textColor})`}}>
             {text}
         </button>
     );

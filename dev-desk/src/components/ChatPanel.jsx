@@ -1,32 +1,34 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './styles/ChatPanel.css'
-import { faChevronUp, faPaperPlane, faPenToSquare} from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faChevronUp, faPaperPlane, faPenToSquare} from '@fortawesome/free-solid-svg-icons'
 import ListItem from './ListItem'
 import Input from './Input';
 import { useDeleteChatMutation , useGetAllChatsQuery, useGetChatsByUsernameQuery } from '../api/ChatsApi';
 import { useEffect, useState } from 'react';
-import { useGetMessagesQuery } from '../api/MessagesApi';
+import { useCreateMessageMutation, useGetMessagesQuery } from '../api/MessagesApi';
 
 export default function ChatPanel({username='2R0GPVEef32h7b7MCaKS'}) {
     const [chatId, setChatId] = useState(null);
+    const [toggle, setToggle] = useState(false);
     useEffect(()=>{
         console.log(chatId);
     },[chatId]);
-    var {data, isLoading, isSucces, isError, error} = useGetChatsByUsernameQuery({username});
+    var {data, isLoading, isSucces, isError, error} = useGetAllChatsQuery();
     console.log(data);
-    useEffect(()=>{console.log(data)},[data])
+    useEffect(()=>{console.log(data)},[data]);
+    useEffect(()=>{if(!toggle) setChatId(null)},[toggle])
     return (
         <>
         <div className='chat-container'>
-            <ChatToggleBar></ChatToggleBar>
-            <ChatList list={data}  setChatId={setChatId}></ChatList>
+            <ChatToggleBar setToggle={setToggle} toggle={toggle}></ChatToggleBar>
+            {toggle && <ChatList list={data}  setChatId={setChatId}></ChatList>}
         </div>
         {chatId && <Chat chat_id={chatId}></Chat>}
         </>
     )
 }
 
-function ChatToggleBar() {
+function ChatToggleBar({setToggle, toggle}) {
     return (
         <div className='chat-toggle'>
             <div>
@@ -36,7 +38,7 @@ function ChatToggleBar() {
             <div>
                 <FontAwesomeIcon icon={faPenToSquare} size='lg'></FontAwesomeIcon>
                 <br></br>
-                <FontAwesomeIcon icon={faChevronUp}></FontAwesomeIcon>
+                <FontAwesomeIcon icon={toggle?faChevronDown:faChevronUp} onClick={()=>{setToggle(!toggle)}}></FontAwesomeIcon>
             </div>
         </div>
     )
@@ -50,8 +52,8 @@ function ChatList({ list = [{id:2, username_2: 'test'}], setChatId, chatId}) {
                 list.map(element => {
                     if (chatId==element.id) console.log(chatId)
                     return (
-                        <div key={element.id} onClick={()=>{setChatId(element.id)}} onDoubleClick={()=>{deleteChat(element.id)}}>
-                            <ListItem title={element.username_2} subText={'element.lastMessage'} time_ago={''} image={require('./assets/icons/profile.png')} imageBorderRadius={'36px'} bgColor={`${element.id!=chatId?'var(--background-color)':'var(--background-color)'}`}></ListItem>
+                        <div key={element.id} onClick={()=>{setChatId(element.id)}} onDoubleClick={()=>{console.log(element.id);deleteChat({id: element.id})}}>
+                            <ListItem title={element.username_2} subText={'element.lastMessage'} time_ago={'1min'} image={require('./assets/icons/profile.png')} imageBorderRadius={'36px'} bgColor={`${element.id!=chatId?'var(--background-color)':'var(--background-color)'}`}></ListItem>
                             <hr></hr>
                         </div>
                     )
@@ -62,12 +64,12 @@ function ChatList({ list = [{id:2, username_2: 'test'}], setChatId, chatId}) {
 }
 
 function Chat(chat_id){
-    var {data, isLoading, isSucces, isError, error} = useGetMessagesQuery({id : chat_id});
+    var {data, isLoading, isSucces, isError, error} = useGetMessagesQuery(chat_id);
     console.log(data)
     return(
         <div className='chat'>
             <ChatLog messages={data}></ChatLog>
-            <ChatInput></ChatInput>
+            <ChatInput chat_id={chat_id}></ChatInput>
         </div>
     )
 }
@@ -96,11 +98,14 @@ function ChatMessage({type , message, time}){
         </div>
     )
 }
-function ChatInput(){
+function ChatInput(chat_id){
+    const [sendMessage]= useCreateMessageMutation();
+    const [input, setInput] = useState('');
+    const username = localStorage.getItem('username')
     return(
         <div className='chat-input'>
-            <div style={{flexGrow:1}}><Input placeholder={'Type here...'}></Input></div>
-            <div className='send-btn'><FontAwesomeIcon icon={faPaperPlane} color='var(--text-color)' size='xl'></FontAwesomeIcon></div>
+            <div style={{flexGrow:1}}><Input placeholder={'Type here...'} change={(e)=>setInput(e.target.value)}></Input></div>
+            <div className='send-btn' onClick={()=>{sendMessage({username : username, message : input, chat_id: chat_id})}}><FontAwesomeIcon icon={faPaperPlane} color='var(--text-color)' size='xl'></FontAwesomeIcon></div>
         </div>
     )
 }

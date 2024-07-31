@@ -9,10 +9,10 @@ export default function ListItem({ title, subText = null, time_ago, image=requir
                     <p className="title">
                         {title}
                     </p>
-                    {subText ?
+                    {subText &&
                         <p className="sub-text">
                             {subText}
-                        </p> : ''}
+                        </p>}
                 </div>
             </div>
             <div className="time-ago">{time_ago} ago</div>

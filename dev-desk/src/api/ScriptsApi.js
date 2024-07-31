@@ -13,7 +13,7 @@ export const scriptsApi = createApi({
             : ['Script'],
       }),
       getScript: builder.query({
-        query:({id})=>`/scripts/${id}`,
+        query:({id})=>`/scripts/id/${id}`,
         providesTags: (result, error, arg) =>
           result
             ? [...result.map(({ id }) => ({ type: 'Script', id })), 'Script']
@@ -51,8 +51,8 @@ export const scriptsApi = createApi({
       }), 
       deleteScript: builder.mutation({
         query: ({id})=>({
+            url: `/scripts/${id}`,
             method: 'DELETE',
-            body: id
         }),
         invalidatesTags: (result, error, arg) => [{ type: 'Script', id: arg.id }],
       })

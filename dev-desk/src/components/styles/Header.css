@@ -21,7 +21,7 @@ nav{
     align-items: baseline;
     padding: 0 0 0.4rem 0;
 }
-nav a{
+a{
     font-weight:600;
     text-decoration: none;
     color: var(--text-color);
