@@ -13,6 +13,7 @@
   /* justify-content: center; */
   gap: 1rem;
   color: var(--text-color);
+  padding: 3rem 0;
 }
 
 .outer-form {

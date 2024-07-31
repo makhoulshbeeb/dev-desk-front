@@ -6,9 +6,7 @@ export const chatsApi = createApi({
     baseUrl: "http://localhost:8000/api/",
     prepareHeaders: (headers) => {
       console.log("prepareHeaders is called");
-      // const token = localStorage.getItem('token');
-      const token =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MjIzODAwNDgsImV4cCI6MTcyMjM4MzY0OCwibmJmIjoxNzIyMzgwMDQ4LCJqdGkiOiJxa1pEUzlpN1gySk1vbEg3Iiwic3ViIjoiMTUzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.OeYphwAp4J-lOBksoIGX2yaXsI8LFQ8simvh6LIE82g";
+      const token = localStorage.getItem('token');
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
       }

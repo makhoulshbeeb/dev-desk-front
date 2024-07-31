@@ -8,10 +8,10 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login, { isLoading, error }] = useLoginMutation();
+  const [login,  isLoading, error ] = useLoginMutation();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const navigate = useNavigate();
-  const handleSignUp = async () => {
+  const handleLogIn = async () => {
     if (email === "" || password === "") {
       alert("Fields cannot be empty");
       return;
@@ -23,16 +23,14 @@ const Login = () => {
     }
 
     try {
-      const result = await login({ email, password }).unwrap();
-      console.log("Login successful:", result);
+      const result = await login({ email, password });
+      console.log("Login successful:", result.error);
       localStorage.setItem("token", result.authorisation.token);
       localStorage.setItem("username", result.user.username);
       navigate("/");
     } catch (e) {
-      console.error("Login failed:", e);
+      console.error("Login failed:", e.message);
       alert("Login failed. Please check your credentials.");
-      setEmail("");
-      setPassword("");
     }
   };
 
@@ -53,7 +51,7 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <Button
-        onClick={handleSignUp}
+        onClick={handleLogIn}
         bgColor="--primary-color"
         text="Login"
         borderRadius="0.5rem"
