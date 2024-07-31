@@ -4,10 +4,16 @@ import Input from "../components/Input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function Header() {
   const navigate = useNavigate();
 
+  const [search, setSearch] = useState(
+    document.getElementById("search")
+      ? document.getElementById("search").value
+      : ""
+  );
   return (
     <div className="header-container flex">
       <nav className="flex">
@@ -15,9 +21,9 @@ export default function Header() {
           Dev<span>Desk</span>
         </div>
 
-        <Link to="/home">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/Favorites">Favorites</Link>
+        <Link to="/">Home</Link>
+        <Link to="/editor">Editor</Link>
+        <Link to="/search">Search</Link>
       </nav>
       <div className="flex auth">
         <FontAwesomeIcon icon={faSearch} size="xl"></FontAwesomeIcon>
@@ -28,17 +34,11 @@ export default function Header() {
           bgColor="--primary-color"
           text="Log In"
           borderRadius="2rem"
-          onClick={() => {
-            navigate("/form/login");
-          }}
         ></Button>
         <Button
           bgColor="--background-light"
           text="Sign Up"
           borderRadius="2rem"
-          onClick={() => {
-            navigate("/form/signup");
-          }}
         ></Button>
       </div>
     </div>

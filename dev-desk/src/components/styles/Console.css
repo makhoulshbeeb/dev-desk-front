@@ -1,0 +1,25 @@
+.head-console-tab{
+    display: flex;
+    padding: 0rem 1rem 0.5rem 1rem;
+    border-bottom: 0.1rem solid var(--text-light);
+    color: var(--text-color);
+
+}
+
+.console-container{
+    width: 35dvw;
+    height:80dvh;
+    display: flex;
+    flex-direction: column; 
+    overflow: hidden;
+    gap: 0.5rem;
+    margin-top: 5dvh;
+}
+
+.console{
+    background-color: var(--background-light);
+    flex-grow: 1;
+    border-radius: 1rem;
+    padding: 1rem;
+    
+}

@@ -3,17 +3,19 @@
     padding: 1rem 2rem;
     border-radius: 1rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 .item-container > .flex{
     gap:1rem;
+    width: 70%;
+
 }
 .item-container > .flex > .column{
     gap: 0.5rem;
     max-height: 72px;
-    width: 60%;
     overflow: hidden;
+    justify-self: flex-start;
 }
 .sub-text, .time-ago {
     font-size: 1.1rem;
@@ -25,10 +27,11 @@
     overflow: hidden;
 }
 .time-ago{
-    width: 25%;
+    width: 30%;
+    flex-shrink: 0;
     text-align: right;
-    overflow-wrap: break-word;
     overflow: hidden;
+    justify-self: flex-end;    
 }
 .item-container > .flex > .img{
     flex-shrink: 0;

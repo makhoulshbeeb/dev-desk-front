@@ -30,9 +30,8 @@ export const messagesApi = createApi({
       }), 
       deleteMessage: builder.mutation({
         query: ({id})=>({
-            url: 'messages/',
+            url: `messages/${id}`,
             method: 'DELETE',
-            body: id
         }),
         invalidatesTags: (result, error, arg) => [{ type: 'Messages', id: arg.id }],
       })
