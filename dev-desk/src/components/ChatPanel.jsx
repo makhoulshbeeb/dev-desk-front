@@ -10,12 +10,8 @@ import { useCreateMessageMutation, useGetMessagesQuery } from '../api/MessagesAp
 export default function ChatPanel({username='2R0GPVEef32h7b7MCaKS'}) {
     const [chatId, setChatId] = useState(null);
     const [toggle, setToggle] = useState(false);
-    useEffect(()=>{
-        console.log(chatId);
-    },[chatId]);
     var {data, isLoading, isSucces, isError, error} = useGetAllChatsQuery();
     console.log(data);
-    useEffect(()=>{console.log(data)},[data]);
     useEffect(()=>{if(!toggle) setChatId(null)},[toggle])
     return (
         <>

@@ -3,4 +3,5 @@ button {
     font-weight: bold;
     padding: 0.7rem 1.3rem;
     border: 0.25rem solid var(--primary-color);
+    cursor:pointer;
 }
