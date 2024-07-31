@@ -37,7 +37,7 @@ const Signup = () => {
       password,
     };
     try {
-      const res = await register(result);
+      const res = await register(result).unwrap();
       console.log("register successful:", res);
       navigate("/form/login");
     } catch (error) {

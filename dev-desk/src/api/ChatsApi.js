@@ -4,14 +4,10 @@ export const chatsApi = createApi({
   reducerPath: "chatsApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:8000/api/",
-    prepareHeaders: (headers) => {
-      console.log("prepareHeaders is called");
-      const token = localStorage.getItem('token');
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
-      }
-      return headers;
-    },
+    headers: {
+      'Authorization' : `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type' : 'application/json'
+    }
   }),
   tagTypes: ["Chat"],
   endpoints: (builder) => ({

@@ -23,7 +23,7 @@ const Login = () => {
     }
 
     try {
-      const result = await login({ email, password });
+      const result = await login({ email, password }).unwrap();
       console.log("Login successful:", result.error);
       localStorage.setItem("token", result.authorisation.token);
       localStorage.setItem("username", result.user.username);

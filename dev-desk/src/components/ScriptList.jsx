@@ -4,9 +4,9 @@ import DropDown from "./DropDown";
 import ListItem from "./ListItem";
 import "./styles/ScriptList.css";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { useGetAllScriptsQuery } from "../api/ScriptsApi";
+import { useCreateScriptMutation, useGetAllScriptsQuery, useGetScriptsByUsernameQuery } from "../api/ScriptsApi";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ScriptList({
   header,
@@ -15,6 +15,9 @@ export default function ScriptList({
     { id: "1", name: "test.js", language: "javascript", username: "tester" },
   ],
 }) {
+  const username = localStorage.getItem('username')
+  const navigator = useNavigate;
+  const [createScript] = useCreateScriptMutation();
   const [language, setLanguage] = useState("javascript");
   var text = (
     <>
@@ -32,6 +35,10 @@ export default function ScriptList({
             bgColor={"--background-color"}
             text={text}
             borderRadius="0.6rem"
+            onClick={async ()=>{
+              const response = await createScript({name: 'untitled', username: username  , language: language, content:''});
+              console.log(response);
+            }}
           ></Button>
         )}
         <DropDown onSelect={setLanguage} language={language}></DropDown>
