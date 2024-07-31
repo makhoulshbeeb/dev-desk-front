@@ -19,6 +19,7 @@ function App() {
           <Route path="/user" element={<User></User>}></Route>
           <Route path="/search" element={<Search></Search>}></Route>
           <Route path="/" element={<Home></Home>}></Route>
+          <Route path="/form/:id" element={<Form />} />
         </Routes>
         <ChatPanel></ChatPanel>
       </Router>
