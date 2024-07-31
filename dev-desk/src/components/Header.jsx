@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 export default function Header() {
-    const [search, setSearch] = useState(document.getElementById('search').value);
+    const [search, setSearch] = useState(document.getElementById('search')?document.getElementById('search').value:'');
     return (
         <div className='header-container flex'>
             <nav className='flex'>

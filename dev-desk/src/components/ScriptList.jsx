@@ -6,8 +6,9 @@ import './styles/ScriptList.css';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useGetAllScriptsQuery } from '../api/ScriptsApi';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-export default function ScriptList({header, height, list = [{name:'test.js', language:'javascript', username:'tester'}]}) {
+export default function ScriptList({header, height, list = [{id:'1', name:'test.js', language:'javascript', username:'tester'}]}) {
     const [language, setLanguage] = useState('javascript');
     var text = <><FontAwesomeIcon icon={faPlus} size='lg'></FontAwesomeIcon>&nbsp; Creat Project</>
     return (
@@ -20,7 +21,7 @@ export default function ScriptList({header, height, list = [{name:'test.js', lan
             {
                 list.map(script => {
                     return (
-                        script.language == language && <ListItem title={script.name} subText={`@${script.username}`} language={script.language} time_ago={'10 hours'}></ListItem>
+                        script.language == language && <Link to={`/editor/?script=${script.id}`}><ListItem title={script.name} subText={`@${script.username}`} language={script.language} time_ago={'10 hours'}></ListItem></Link>
                     )
                 })
             }
