@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Editor from "./pages/Editor";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
+import Form from "./pages/Form";
 import User from "./pages/User";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
@@ -13,9 +14,7 @@ function App() {
       <Router>
         <Header></Header>
         <Routes>
-          <Route path="/editor" element={<Editor></Editor>}>
-            {" "}
-          </Route>
+          <Route path="/editor" element={<Editor></Editor>}></Route>
           <Route path="/user" element={<User></User>}></Route>
           <Route path="/search" element={<Search></Search>}></Route>
           <Route path="/" element={<Home></Home>}></Route>
