@@ -27,7 +27,7 @@ const Login = () => {
       console.log("Login successful:", result);
       localStorage.setItem("token", result.authorisation.token);
       localStorage.setItem("username", result.user.username);
-      navigate("/home");
+      navigate("/");
     } catch (e) {
       console.error("Login failed:", e);
       alert("Login failed. Please check your credentials.");

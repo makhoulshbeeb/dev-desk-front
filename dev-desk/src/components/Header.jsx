@@ -34,11 +34,17 @@ export default function Header() {
           bgColor="--primary-color"
           text="Log In"
           borderRadius="2rem"
+          onClick={() => {
+            navigate("/form/login");
+          }}
         ></Button>
         <Button
           bgColor="--background-light"
           text="Sign Up"
           borderRadius="2rem"
+          onClick={() => {
+            navigate("/form/signup");
+          }}
         ></Button>
       </div>
     </div>
