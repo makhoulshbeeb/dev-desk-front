@@ -4,7 +4,7 @@ import ScriptList from "../components/ScriptList";
 export default function Home() {
   return (
     <>
-      <HeroSection></HeroSection>
+      <HeroSection />
       <ScriptList height={"80dvh"}></ScriptList>
     </>
   );

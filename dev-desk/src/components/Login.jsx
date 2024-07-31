@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import Button from "./Button";
 import LabelInput from "./LabelInput";
 import "./styles/Form.css";
+import { useLoginMutation } from "../api/AuthApi";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [login, { isLoading, error }] = useLoginMutation();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  const handleSignUp = () => {
+  const navigate = useNavigate();
+  const handleSignUp = async () => {
     if (email === "" || password === "") {
       alert("Fields cannot be empty");
       return;
@@ -20,12 +22,18 @@ const Login = () => {
       return;
     }
 
-    const user = {
-      email,
-      password,
-    };
-
-    console.log("User logged in:", user);
+    try {
+      const result = await login({ email, password }).unwrap();
+      console.log("Login successful:", result);
+      localStorage.setItem("token", result.authorisation.token);
+      localStorage.setItem("username", result.user.username);
+      navigate("/home");
+    } catch (e) {
+      console.error("Login failed:", e);
+      alert("Login failed. Please check your credentials.");
+      setEmail("");
+      setPassword("");
+    }
   };
 
   return (
