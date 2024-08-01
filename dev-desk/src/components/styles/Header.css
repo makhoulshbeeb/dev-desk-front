@@ -29,10 +29,15 @@ a{
 }
 .auth{
     width:50%;
-    gap:0.8rem;
+    gap:1rem;
     justify-content: flex-end;  
     align-items: center;
 }
 .auth > div{
     width:48%;
+}
+.user-pfp{
+    background-image: url(../assets/icons/profile.png);
+    background-size: cover;
+    background-repeat: no-repeat;
 }

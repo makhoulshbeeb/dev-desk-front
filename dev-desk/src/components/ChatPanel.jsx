@@ -19,10 +19,11 @@ import {
   useGetMessagesQuery,
 } from "../api/MessagesApi";
 
-export default function ChatPanel({username='2R0GPVEef32h7b7MCaKS'}) {
+export default function ChatPanel() {
     const [chatId, setChatId] = useState(null);
     const [toggle, setToggle] = useState(false);
-    var {data, isLoading, isSucces, isError, error} = useGetAllChatsQuery();
+    const username = localStorage.getItem('username')
+    var {data, isLoading, isSucces, isError, error} = useGetChatsByUsernameQuery({username_1: username});
     console.log(data);
     useEffect(()=>{if(!toggle) setChatId(null)},[toggle])
     return (
@@ -110,49 +111,7 @@ function Chat(chat_id) {
   );
 }
 
-function ChatLog({
-  messages = [
-    { username: "moxifloxi", message: "OK! stfu", time: "28-7-2024 2:02 am" },
-    {
-      username: "LebronJames",
-      message: "Wanna sprite cranberry?",
-      time: "28-7-2024 2:01 am",
-    },
-    { username: "moxifloxi", message: "no", time: "28-7-2024 2:02 am" },
-    {
-      username: "LebronJames",
-      message: "Wanna sprite cranberry?",
-      time: "28-7-2024 2:01 am",
-    },
-    { username: "moxifloxi", message: "no", time: "28-7-2024 2:02 am" },
-    {
-      username: "LebronJames",
-      message:
-        "Wanna a sprite cranberry? Wanna a sprite cranberry?Wanna a sprite cranberry?",
-      time: "28-7-2024 2:01 am",
-    },
-    { username: "moxifloxi", message: "no", time: "28-7-2024 2:02 am" },
-    {
-      username: "LebronJames",
-      message:
-        "Wanna a sprite cranberry? Wanna a sprite cranberry?Wanna a sprite cranberry?",
-      time: "28-7-2024 2:01 am",
-    },
-    { username: "moxifloxi", message: "no", time: "28-7-2024 2:02 am" },
-    {
-      username: "LebronJames",
-      message: "Wanna sprite cranberry?",
-      time: "28-7-2024 2:01 am",
-    },
-    { username: "moxifloxi", message: "no", time: "28-7-2024 2:02 am" },
-    {
-      username: "LebronJames",
-      message:
-        "Wanna a sprite cranberry? Wanna a sprite cranberry?Wanna a sprite cranberry?",
-      time: "28-7-2024 2:01 am",
-    },
-  ],
-}) {
+function ChatLog({messages = []}) {
   return (
     <div className="chat-log">
       {messages.map((element) => {
@@ -189,8 +148,9 @@ function ChatInput(chat_id) {
       </div>
       <div
         className="send-btn"
-        onClick={() => {
-          sendMessage({ username: username, message: input, chat_id: chat_id });
+        onClick={async () => {
+           const response = await sendMessage({ username: username, message: input, chat_id: chat_id });
+           console.log(response)
         }}
       >
         <FontAwesomeIcon

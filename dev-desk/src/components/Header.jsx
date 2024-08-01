@@ -2,18 +2,15 @@ import "./styles/Header.css";
 import Button from "./Button";
 import Input from "../components/Input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Search from "../pages/Search";
 
-export default function Header() {
+export default function Header({search,setSearch}) {
   const navigate = useNavigate();
+  const username = localStorage.getItem('username')
 
-  const [search, setSearch] = useState(
-    document.getElementById("search")
-      ? document.getElementById("search").value
-      : ""
-  );
   return (
     <div className="header-container flex">
       <nav className="flex">
@@ -26,10 +23,12 @@ export default function Header() {
         <Link to="/search">Search</Link>
       </nav>
       <div className="flex auth">
-        <FontAwesomeIcon icon={faSearch} size="xl"></FontAwesomeIcon>
+        <FontAwesomeIcon icon={faSearch} size="xl" onClick={()=>{if(search.trim()!='') navigate(`/search/`)}}></FontAwesomeIcon>
         <div>
-          <Input name="search" id="search" placeholder="Search . . ."></Input>
+          <Input name="search" id="search" placeholder="Search . . ." change={(e)=>setSearch(e.target.value)}></Input>
         </div>
+        {username?<FontAwesomeIcon icon={faUser} size='3x'></FontAwesomeIcon>:
+        <>
         <Button
           bgColor="--primary-color"
           text="Log In"
@@ -46,6 +45,7 @@ export default function Header() {
             navigate("/form/signup");
           }}
         ></Button>
+        </>}
       </div>
     </div>
   );

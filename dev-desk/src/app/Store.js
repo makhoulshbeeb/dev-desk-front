@@ -1,12 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import { chatsApi } from '../api/ChatsApi.js'
+import { chatsApi } from '../api/ChatsApi'
 import { scriptsApi } from '../api/ScriptsApi'
 import { messagesApi } from '../api/MessagesApi'
 import { usersApi } from '../api/UsersApi'
 import { authApi } from '../api/AuthApi'
 
 const store = configureStore({
+  enhancers: (getDefaultEnhancers) =>
+    getDefaultEnhancers({
+      autoBatch: { type: 'tick' },
+    }),
   reducer: {
     [chatsApi.reducerPath]: chatsApi.reducer,
     [scriptsApi.reducerPath]: scriptsApi.reducer,

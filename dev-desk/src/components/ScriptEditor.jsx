@@ -5,6 +5,7 @@ import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { useRef, useState } from 'react';
 import Console from './Console';
 import { useUpdateScriptMutation } from '../api/ScriptsApi';
+import Assistant from './Assistant';
 
 const LANGUAGE_VERSIONS = {
   javascript: "18.15.0",
@@ -27,6 +28,7 @@ export default function ScriptEditor({ scriptData = { id: '1', name: 'dummy.js',
   };
   return (
     <div className='script-editor'>
+      <Assistant editorRef={editorRef}></Assistant>
       <div className='editor-container'>
         <div className="head-editor-tab">
           {<h3>{header}</h3>}

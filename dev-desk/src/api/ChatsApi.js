@@ -19,7 +19,7 @@ export const chatsApi = createApi({
           : ["Chat"],
     }),
     getChatsByUsername: builder.query({
-      query: ({ username }) => `chats/${username}`,
+      query: ({ username_1 }) => `chats/${username_1}`,
       providesTags: (result, error, arg) =>
         result
           ? [...result.map(({ id }) => ({ type: "Chat", id })), "Chat"]
@@ -46,7 +46,7 @@ export const chatsApi = createApi({
         url: `chats/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, arg) => [{ type: "Chat", id: arg.id }],
+      invalidatesTags: (result, error, arg) => [{ type: "Chat", id: arg.id },'Messages'],
     }),
   }),
 });

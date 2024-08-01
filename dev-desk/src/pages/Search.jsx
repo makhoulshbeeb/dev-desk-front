@@ -1,13 +1,14 @@
+import { useParams } from "react-router-dom";
 import { useGetScriptsByNameQuery } from "../api/ScriptsApi";
 import ScriptList from "../components/ScriptList";
 
 
-export default function Search(searchFor){
-    var search = localStorage.getItem('search');
-    var {data, isLoading, isSucces, isError, error} = useGetScriptsByNameQuery({name: search});
+export default function Search({searchFor}){
+    var {data, isLoading, isSucces, isError, error} = useGetScriptsByNameQuery({name: searchFor});
+    console.log(searchFor)
     return(
         <center>
-            <ScriptList header={search} list={data}></ScriptList>
+            <ScriptList header={searchFor} list={data}></ScriptList>
         </center>
     )
 }
