@@ -3,7 +3,7 @@ import Button from './Button'
 import axios from "axios";
 import { useState, useToast } from 'react';
 
-export default function Assistant({ editorRef}) {
+export default function Assistant({ editorRef, language}) {
     const [output, setOutput] = useState();
     async function assit(){
         const response = await axios.post(
@@ -11,7 +11,7 @@ export default function Assistant({ editorRef}) {
             {
               model: "gpt-3.5-turbo",
               messages: [
-                { role: "system", content: "You are a helpful coding assistant." },
+                { role: "system", content: `You are a helpful ${language} coding assistant.` },
                 { role: "user", content: editorRef.current.getValue() },
               ],
               max_tokens: 100,

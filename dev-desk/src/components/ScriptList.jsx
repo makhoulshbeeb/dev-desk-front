@@ -47,12 +47,13 @@ export default function ScriptList({
         {list.map((script) => {
           return (
             script.language == language && (
-              <Link to={`/editor/?script=${script.id}`}>
+              <Link to={`/editor/${script.id}`}>
                 <ListItem
                   title={script.name}
                   subText={`@${script.username}`}
                   language={script.language}
                   time_ago={"10 hours"}
+                  image={require(`./assets/icons/${language}.png`)}
                 ></ListItem>
               </Link>
             )

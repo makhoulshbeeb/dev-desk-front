@@ -16,8 +16,8 @@ const LANGUAGE_VERSIONS = {
   php: "8.2.3",
 };
 
-export default function ScriptEditor({ scriptData = { id: '1', name: 'dummy.js', content: 'console.log("Hello World!")', language: 'javascript' } }) {
-  const header = scriptData.name;
+export default function ScriptEditor({ scriptData = [{ id: '1', name: 'dummy.js', content: 'console.log("Hello World!")', language: 'javascript' }] }) {
+  const header = scriptData[0].name;
   const editorRef = useRef();
   const [value, setValue] = useState(scriptData.content);
   const [updateScript] = useUpdateScriptMutation();
@@ -28,11 +28,11 @@ export default function ScriptEditor({ scriptData = { id: '1', name: 'dummy.js',
   };
   return (
     <div className='script-editor'>
-      <Assistant editorRef={editorRef}></Assistant>
+      <Assistant editorRef={editorRef} language={scriptData.language}></Assistant>
       <div className='editor-container'>
         <div className="head-editor-tab">
           {<h3>{header}</h3>}
-          <FontAwesomeIcon icon={faSave} size='2xl' onClick={()=>{updateScript({id: scriptData.id ,content: value})}}></FontAwesomeIcon>
+          <FontAwesomeIcon icon={faSave} size='2xl' onClick={()=>{updateScript({id: scriptData.id ,content: value, name: header})}}></FontAwesomeIcon>
         </div>
         <div className='editor'>
           <Editor options={{

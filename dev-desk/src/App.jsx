@@ -16,7 +16,7 @@ function App() {
       <Router>
         <Header setSearch={setSearch} search={search}></Header>
         <Routes>
-          <Route path="/editor" element={<Editor></Editor>}></Route>
+          <Route path="/editor/:script" element={<Editor></Editor>}></Route>
           <Route path="/user" element={<User></User>}></Route>
           <Route path="/search" element={<Search searchFor={search}></Search>}></Route>
           <Route path="/" element={<Home></Home>}></Route>
