@@ -80,6 +80,11 @@ hr {
   width: 100%;
   padding: 1rem;
 }
+.chat-reverse{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 .message {
   max-height: fit-content;
   max-width: 75%;
@@ -127,4 +132,5 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }

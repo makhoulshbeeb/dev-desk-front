@@ -52,7 +52,7 @@ export default function ScriptList({
                   title={script.name}
                   subText={`@${script.username}`}
                   language={script.language}
-                  time_ago={"10 hours"}
+                  time_ago={script.created_at}
                   image={require(`./assets/icons/${language}.png`)}
                 ></ListItem>
               </Link>

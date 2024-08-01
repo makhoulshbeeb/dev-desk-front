@@ -10,15 +10,14 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { useState } from "react";
 
 function App() {
-  const [search, setSearch] = useState('');
   return (
     <div className="App">
       <Router>
-        <Header setSearch={setSearch} search={search}></Header>
+        <Header></Header>
         <Routes>
           <Route path="/editor/:script" element={<Editor></Editor>}></Route>
-          <Route path="/user" element={<User></User>}></Route>
-          <Route path="/search" element={<Search searchFor={search}></Search>}></Route>
+          <Route path="/user/:username" element={<User></User>}></Route>
+          <Route path="/search/:search" element={<Search></Search>}></Route>
           <Route path="/" element={<Home></Home>}></Route>
           <Route path="/form/:id" element={<Form />} />
         </Routes>

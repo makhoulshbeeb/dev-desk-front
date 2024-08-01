@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useGetScriptsByUsernameQuery } from "../api/ScriptsApi";
 import HeroSection from "../components/HeroSection";
 import ScriptList from "../components/ScriptList";
@@ -6,6 +7,7 @@ export default function Home() {
   var username = localStorage.getItem("username");
   var { data, isLoading, isSucces, isError, error } =
     useGetScriptsByUsernameQuery({ username: username });
+  useEffect(()=>{},[]);
   return (
     <>
       <HeroSection></HeroSection>

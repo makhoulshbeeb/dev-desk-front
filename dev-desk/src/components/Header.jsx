@@ -7,7 +7,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Search from "../pages/Search";
 
-export default function Header({search,setSearch}) {
+export default function Header() {
+  const [search, setSearch]= useState('');
   const navigate = useNavigate();
   const username = localStorage.getItem('username')
 
@@ -23,11 +24,11 @@ export default function Header({search,setSearch}) {
         <Link to="/search">Search</Link>
       </nav>
       <div className="flex auth">
-        <FontAwesomeIcon icon={faSearch} size="xl" onClick={()=>{if(search.trim()!='') navigate(`/search/`)}}></FontAwesomeIcon>
+        <FontAwesomeIcon icon={faSearch} size="xl" onClick={()=>{if(search.trim()!='') navigate(`/search/${search}`)}}></FontAwesomeIcon>
         <div>
           <Input name="search" id="search" placeholder="Search . . ." change={(e)=>setSearch(e.target.value)}></Input>
         </div>
-        {username?<FontAwesomeIcon icon={faUser} size='3x'></FontAwesomeIcon>:
+        {username?<FontAwesomeIcon icon={faUser} size='3x' onClick={()=>{navigate(`/user/${username}`)}}></FontAwesomeIcon>:
         <>
         <Button
           bgColor="--primary-color"

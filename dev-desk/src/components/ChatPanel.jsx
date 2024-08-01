@@ -99,9 +99,9 @@ function ChatList({
   );
 }
 
-function Chat(chat_id) {
+function Chat({chat_id}) {
   var { data, isLoading, isSucces, isError, error } =
-    useGetMessagesQuery(chat_id);
+    useGetMessagesQuery({chat_id});
   console.log(data);
   return (
     <div className="chat">
@@ -112,29 +112,33 @@ function Chat(chat_id) {
 }
 
 function ChatLog({messages = []}) {
+  const username = localStorage.getItem('username');
+  console.log(messages)
   return (
     <div className="chat-log">
+      <div className="chat-reverse">
       {messages.map((element) => {
         return (
           <ChatMessage
-            type={element.username == "moxifloxi" ? "sent" : "recieved"}
+            type={element.username == username ? "sent" : "recieved"}
             message={element.message}
-            time={element.time}
+            created_at={element.created_at}
           ></ChatMessage>
         );
       })}
+      </div>
     </div>
   );
 }
-function ChatMessage({ type, message, time }) {
+function ChatMessage({ type, message, created_at }) {
   return (
     <div className={`message ${type}`}>
       <div>{message}</div>
-      <p>{time}</p>
+      <p>{created_at}</p>
     </div>
   );
 }
-function ChatInput(chat_id) {
+function ChatInput({chat_id}) {
   const [sendMessage] = useCreateMessageMutation();
   const [input, setInput] = useState("");
   const username = localStorage.getItem("username");
@@ -148,10 +152,7 @@ function ChatInput(chat_id) {
       </div>
       <div
         className="send-btn"
-        onClick={async () => {
-           const response = await sendMessage({ username: username, message: input, chat_id: chat_id });
-           console.log(response)
-        }}
+        onClick={async () => {sendMessage({ username: username, message: input, chat_id: chat_id });}}
       >
         <FontAwesomeIcon
           icon={faPaperPlane}

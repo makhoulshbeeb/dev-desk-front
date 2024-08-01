@@ -19,7 +19,18 @@
 }
 .user-info{
     height: 55%;
-    padding: 1rem;
+    padding: 2rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap:1rem;
+    color: var(--text-color);
+
+}
+.user-info > h3{
+    font-size: 2rem;
+    max-width: 80%;
+    overflow-wrap: anywhere;
 }
 .user-pfp{
     position: absolute;

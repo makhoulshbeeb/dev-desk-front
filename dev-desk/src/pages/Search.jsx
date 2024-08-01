@@ -3,12 +3,13 @@ import { useGetScriptsByNameQuery } from "../api/ScriptsApi";
 import ScriptList from "../components/ScriptList";
 
 
-export default function Search({searchFor}){
-    var {data, isLoading, isSucces, isError, error} = useGetScriptsByNameQuery({name: searchFor});
-    console.log(searchFor)
+export default function Search(){
+    const {search} = useParams();
+    var {data, isLoading, isSucces, isError, error} = useGetScriptsByNameQuery({name: search});
+    console.log(search)
     return(
         <center>
-            <ScriptList header={searchFor} list={data}></ScriptList>
+            <ScriptList header={search} list={data}></ScriptList>
         </center>
     )
 }

@@ -8,6 +8,6 @@ export default function Editor(){
     console.log(script);
     const {data} = useGetScriptQuery({id: script});
     return(
-            <ScriptEditor scriptData={data}></ScriptEditor>
+            data && <ScriptEditor scriptData={data}></ScriptEditor>
     )
 }
